@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:rick_and_morty/models/location.dart';
+
 Character characterFromJson(String str) => Character.fromJson(json.decode(str));
 
 String characterToJson(Character data) => json.encode(data.toJson());
@@ -26,8 +28,8 @@ class Character {
     String species;
     String type;
     String gender;
-    LocationCharacter origin;
-    LocationCharacter location;
+    Location origin;
+    Location location;
     String image;
     List<String> episode;
     String url;
@@ -40,8 +42,8 @@ class Character {
         species: json["species"],
         type: json["type"],
         gender: json["gender"],
-        origin: LocationCharacter.fromJson(json["origin"]),
-        location: LocationCharacter.fromJson(json["location"]),
+        origin: Location.fromJson(json["origin"]),
+        location: Location.fromJson(json["location"]),
         image: json["image"],
         episode: List<String>.from(json["episode"].map((x) => x)),
         url: json["url"],
@@ -64,22 +66,4 @@ class Character {
     };
 }
 
-class LocationCharacter {
-    LocationCharacter({
-      required this.name,
-      required this.url,
-    });
 
-    String name;
-    String url;
-
-    factory LocationCharacter.fromJson(Map<String, dynamic> json) => LocationCharacter(
-        name: json["name"],
-        url: json["url"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "name": name,
-        "url": url,
-    };
-}

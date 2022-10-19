@@ -34,13 +34,15 @@ class _LocationDetails extends State<LocationDetails>{
 
   void _formatCharacter() async{
     Location location = widget.location;
-    createdDate = DateFormat('yyyy-MM-dd').format(location.created);
+    if(location.created != null){
+      createdDate = DateFormat('yyyy-MM-dd').format(location.created!);
+    }
     setState(() {
       locationInfo = location;
     });
     details.addAll({
       "Air Date"    : location.dimension,
-      "Characters"  : location.residents.length.toString(),
+      "Characters"  : location.residents != null ? location.residents!.length.toString() : [].length.toString(),
       "Url"         : location.url,
       "Created"     : createdDate,
     });

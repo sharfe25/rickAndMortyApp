@@ -10,31 +10,31 @@ String locationToJson(Location data) => json.encode(data.toJson());
 
 class Location {
     Location({
-        required this.id,
+        this.id = 0,
         required this.name,
-        required this.type,
-        required this.dimension,
-        required this.residents,
+        this.type = "",
+        this.dimension = "",
+        this.residents,
         required this.url,
-        required this.created,
+        this.created,
     });
 
     int id;
     String name;
     String type;
     String dimension;
-    List<String> residents;
+    List<String>? residents;
     String url;
-    DateTime created;
+    DateTime? created;
 
     factory Location.fromJson(Map<String, dynamic> json) => Location(
-        id: json["id"],
+        id: json["id"] ?? 0,
         name: json["name"],
-        type: json["type"],
-        dimension: json["dimension"],
-        residents: List<String>.from(json["residents"].map((x) => x)),
+        type: json["type"] ?? "",
+        dimension: json["dimension"] ?? "",
+        residents: json["residents"] != null? List<String>.from(json["residents"].map((x) => x)) : null,
         url: json["url"],
-        created: DateTime.parse(json["created"]),
+        created: json["created"] != null? DateTime.parse(json["created"]) : null,
     );
 
     Map<String, dynamic> toJson() => {
@@ -42,8 +42,8 @@ class Location {
         "name": name,
         "type": type,
         "dimension": dimension,
-        "residents": List<dynamic>.from(residents.map((x) => x)),
+        "residents": residents != null ? List<dynamic>.from(residents!.map((x) => x)) : null,
         "url": url,
-        "created": created.toIso8601String(),
+        "created": created != null ? created!.toIso8601String() : null,
     };
 }
